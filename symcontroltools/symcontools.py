@@ -19,3 +19,8 @@ def get_SISO_sims(dim, suf):
     D = sp.Matrix( [0] )
     return [(a, b, c), (A, B, C, D)]
 
+
+
+def get_tf(A, B, C, s):
+    tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
+    return tf
