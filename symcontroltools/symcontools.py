@@ -19,7 +19,8 @@ def dp(ep, capt="", pmode=0, isptype = False):
 		pstr += str(type(ep))
 		if hasattr(ep, "shape"):
 			pstr += ", " + str(ep.shape)
-	dstr = "$$" + sp.latex(ep) + "$$" + os.linesep + "<details><summary>sympy.srepr()</summary><p>" + sp.srepr(ep) + "</p></details>"
+	#dstr = "$$" + sp.latex(ep) + "$$" + os.linesep + "<details><summary>sympy.srepr()</summary><p>" + sp.srepr(ep) + "</p></details>"
+	dstr = "$$" + sp.latex(ep) + "$$" + "<details><summary>sympy.srepr()</summary><p>" + sp.srepr(ep) + "</p></details>"
 	if str(capt) != "": 
 		display(pstr)
 	display(ep); print(dstr)
@@ -46,6 +47,7 @@ def get_SISO_sims(dim, suf):
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
     return tf
+
 
 
 
