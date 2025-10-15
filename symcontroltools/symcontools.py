@@ -4,6 +4,25 @@ import sympy as sp
 def testprint(tst):
     print(tst)
 
+
+def dp(ep, capt="", pmode=0, isptype = False):
+	"""
+	depend :
+	import sympy as sp
+	import os
+	"""
+	pstr = capt +": "
+	if isptype:
+		pstr += str(type(ep))
+		if hasattr(ep, "shape"):
+			pstr += ", " + str(ep.shape)
+	dstr = "$$" + sp.latex(ep) + "$$" + os.linesep + "<details><summary>sympy.srepr()</summary><p>" + sp.srepr(ep) + "</p></details>"
+	if capt != "": 
+		print(pstr)
+	display(ep); print(dstr)
+	return
+
+
 def setf(tp, suf, size):
     """
     連番の添え字付きのシンボリック変数を生成するテキストを生成する。
