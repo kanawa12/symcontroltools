@@ -11,13 +11,13 @@ def dp(ep, capt="", pmode=0, isptype = False):
 	import sympy as sp
 	import os
 	"""
-	pstr = capt +": "
+	pstr = str(capt) +": "
 	if isptype:
 		pstr += str(type(ep))
 		if hasattr(ep, "shape"):
 			pstr += ", " + str(ep.shape)
 	dstr = "$$" + sp.latex(ep) + "$$" + os.linesep + "<details><summary>sympy.srepr()</summary><p>" + sp.srepr(ep) + "</p></details>"
-	if capt != "": 
+	if str(capt) != "": 
 		print(pstr)
 	display(ep); print(dstr)
 	return
@@ -43,5 +43,6 @@ def get_SISO_sims(dim, suf):
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
     return tf
+
 
 
