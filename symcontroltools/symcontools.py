@@ -5,12 +5,15 @@ import os
 def dp(ep, capt="", pmode=0, isptype = False):
 	"""
 	sympyで計算した数式をjupyter notebook上で表示する際、latex表現とsrepr()テキストを同時に表示する。
-	引数 pmodeは互換性のため
+	引数 pmode : 2のときはそのままテキスト出力 
 	isptype : 渡された変数の型と(存在すれば)形を出力するか
 	depend :
 	import sympy as sp
 	import os
 	"""
+	if pmode == 2:
+		print(ep)
+		return
 	pstr = str(capt) +": "
 	if isptype:
 		pstr += str(type(ep))
@@ -43,6 +46,7 @@ def get_SISO_sims(dim, suf):
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
     return tf
+
 
 
 
