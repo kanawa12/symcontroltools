@@ -1,8 +1,5 @@
-
 import sympy as sp
-
-def testprint(tst):
-    print(tst)
+import os
 
 
 def dp(ep, capt="", pmode=0, isptype = False):
@@ -46,4 +43,5 @@ def get_SISO_sims(dim, suf):
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
     return tf
+
 
