@@ -52,6 +52,16 @@ def eqs_to_mat(eqList: list, valList: list) -> sp.Matrix:
 	"""
 	return sp.Matrix([sp.Matrix([ sp.Poly(eq, valList[:-1]).coeff_monomial(v) for v in valList ]).reshape(1,len(valList)) for eq in list(eqList) ])
 
+def eqs_to_mateqs(eqList: list, valList: list) -> sp.Matrix:
+	"""
+	"""
+	mat = eqs_to_mat(eqList, valList)
+	A = mat[:, :-1]
+	x = valList[:-1]
+	y = -1*mat[:, -1]
+	return ( sp.Eq(sp.MatMul(A, x, evaluate=False), y, evaluate=False), sp.Tuple(A, x, y) )
+
+
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
     return tf
