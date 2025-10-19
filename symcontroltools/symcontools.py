@@ -54,12 +54,13 @@ def eqs_to_mat(eqList: list, valList: list) -> sp.Matrix:
 
 def eqs_to_mateqs(eqList: list, valList: list) -> sp.Matrix:
 	"""
+	aaa
 	"""
 	mat = eqs_to_mat(eqList, valList)
-	A = mat[:, :-1]
-	x = valList[:-1]
-	y = -1*mat[:, -1]
-	return ( sp.Eq(sp.MatMul(A, x, evaluate=False), y, evaluate=False), sp.Tuple(A, x, y) )
+	matA = mat[:, :-1]
+	matX = sp.Matrix(valList[:-1])
+	matY = -1*mat[:, -1]
+	return ( sp.Eq(sp.MatMul(matA, matX, evaluate=False), matY, evaluate=False), matA, matX, matY )
 
 
 def get_tf(A, B, C, s):
