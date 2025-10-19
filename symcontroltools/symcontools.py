@@ -39,6 +39,15 @@ def get_SISO_sims(dim, suf):
     return [(a, b, c), (A, B, C, D)]
 
 
+def eqs_to_mat(eqList: list, valList: list) -> sp.Matrix:
+	"""
+	シンボリック式のリストを行列に変換する。
+	ex:
+	eqList : List
+	valList = [ap[1], ap[3], bp[0], bp[1]]
+	"""
+	valList.append(1)
+	return sp.Matrix([sp.Matrix([ sp.Poly(eq, valList[:-1]).coeff_monomial(v) for v in valList ]).reshape(1,len(valList)) for eq in list(eqList) ])
 
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
