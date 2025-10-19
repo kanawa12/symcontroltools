@@ -48,9 +48,8 @@ def eqs_to_mat(eqList: list, valList: list) -> sp.Matrix:
 	シンボリック式のリストを行列に変換する。
 	ex:
 	eqList : List
-	valList = [ap[1], ap[3], bp[0], bp[1]]
+	valList = [ap[1], ap[3], bp[0], bp[1], 1]
 	"""
-	valList.append(1)
 	return sp.Matrix([sp.Matrix([ sp.Poly(eq, valList[:-1]).coeff_monomial(v) for v in valList ]).reshape(1,len(valList)) for eq in list(eqList) ])
 
 def get_tf(A, B, C, s):
