@@ -1,5 +1,8 @@
 import sympy as sp
 import os
+import numpy as np
+import pandas as pd
+import io
 
 
 def dp(ep, capt="", pmode=0, isptype = False):
@@ -62,6 +65,16 @@ def eqs_to_mateqs(eqList: list, valList: list) -> sp.Matrix:
 	matY = -1*mat[:, -1]
 	return ( sp.Eq(sp.MatMul(matA, matX, evaluate=False), matY, evaluate=False), matA, matX, matY )
 
+def setDataOrder(arg_order, csv_order, csv_data: str, isFile: bool):
+	if isFile:
+		df = pd.read_csv(csv_data, header=None, names=csv_order, skipinitialspace=True)
+	else:
+		f = io.StringIO(csv_data.strip())
+		df = pd.read_csv(f, header=None, names=csv_order, skipinitialspace=True)
+	datadict = df.to_dict(orient='list')
+	ordered_values = [datadict[key] for key in arg_order]
+	val = [ list(d) for d in list(zip(*ordered_values))]
+	return val
 
 def get_tf(A, B, C, s):
     tf = C * (s*sp.eye(A.shape[0]) - A).inv() * B
