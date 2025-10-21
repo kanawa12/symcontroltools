@@ -68,10 +68,10 @@ def eqs_to_mateqs(eqList: list, valList: list) -> sp.Matrix:
 
 def getDataDict(csv_order, csv_data: str, isFile: bool):
 	if isFile:
-		df = pd.read_csv(csv_data, header=None, names=csv_order, skipinitialspace=True)
+		df = pd.read_csv(csv_data, header=None, names=csv_order, skipinitialspace=True, dtype=float)
 	else:
 		f = io.StringIO(csv_data.strip())
-		df = pd.read_csv(f, header=None, names=csv_order, skipinitialspace=True)
+		df = pd.read_csv(f, header=None, names=csv_order, skipinitialspace=True, dtype = float)
 	datadict = df.to_dict(orient='list')
 	return datadict
 
