@@ -65,13 +65,17 @@ def eqs_to_mateqs(eqList: list, valList: list) -> sp.Matrix:
 	matY = -1*mat[:, -1]
 	return ( sp.Eq(sp.MatMul(matA, matX, evaluate=False), matY, evaluate=False), matA, matX, matY )
 
-def setDataOrder(arg_order, csv_order, csv_data: str, isFile: bool):
+
+def getDataDict(csv_order, csv_data: str, isFile: bool):
 	if isFile:
 		df = pd.read_csv(csv_data, header=None, names=csv_order, skipinitialspace=True)
 	else:
 		f = io.StringIO(csv_data.strip())
 		df = pd.read_csv(f, header=None, names=csv_order, skipinitialspace=True)
 	datadict = df.to_dict(orient='list')
+	return datadict
+
+def setDataOrder(arg_order, datadict):
 	ordered_values = [datadict[key] for key in arg_order]
 	val = [ list(d) for d in list(zip(*ordered_values))]
 	return val
