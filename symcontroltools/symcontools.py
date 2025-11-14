@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import io
 import json
+from pathlib import Path
 
 
 def dp(ep, capt="", pmode=0, isptype = False):
@@ -87,10 +88,14 @@ def get_tf(A, B, C, s):
 
 
 def readsacjson(keys):
-	with open("srepr_texts.json") as f:
+	script_path = Path(__file__).resolve()
+	script_dir = script_path.parent
+	json_path = script_dir / "srepr_texts.json"
+	with open(json_path, 'r', encoding='utf-8') as f:
 		d = json.load(f)
 	return [d[k] for k in keys]
 	
+
 
 
 
