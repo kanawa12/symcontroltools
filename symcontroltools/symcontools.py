@@ -3,6 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 import io
+import json
 
 
 def dp(ep, capt="", pmode=0, isptype = False):
@@ -85,6 +86,11 @@ def get_tf(A, B, C, s):
     return tf
 
 
+def readsacjson(keys):
+	with open("srepr_texts.json") as f:
+		d = json.load(f)
+	return [d[k] for k in keys]
+	
 
 
 
