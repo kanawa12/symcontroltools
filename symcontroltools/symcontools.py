@@ -2,6 +2,7 @@ import sympy as sp
 import os
 import numpy as np
 import pandas as pd
+import control as ct
 import io
 import json
 from pathlib import Path
@@ -87,6 +88,17 @@ def get_tf(A, B, C, s):
     return tf
 
 
+def ss_to_ssobs(sys):
+	n=sys.A.size()[0]
+	T = np.zeros([n,n])
+	for i in range(n):
+	    T[i, (n-1)-i] = 1
+	return ct.similarity_transform(sys, T)
+
+def zpk_to_ss_obs(zeros, poles, gein):
+	zpksys = ct.zpk(zeros=zeros, poles=poles, gain=gain)
+	sssys  = ct.tf2ss(zpksys)
+
 def readsacjson(keys):
 	script_path = Path(__file__).resolve()
 	script_dir = script_path.parent
@@ -95,6 +107,7 @@ def readsacjson(keys):
 		d = json.load(f)
 	return [d[k] for k in keys]
 	
+
 
 
 
