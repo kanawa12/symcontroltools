@@ -99,9 +99,9 @@ def zpk_to_ss_obs(zeros, poles, gein):
 	zpksys = ct.zpk(zeros=zeros, poles=poles, gain=gain)
 	sssys  = ct.tf2ss(zpksys)
 
-def sym_to_ssobs(tfs):
-	nc = np.array(sp.poly(sp.numer(tfs)).all_coeffs())
-	dc = np.array(sp.poly(sp.denom(tfs)).all_coeffs())
+def sym_to_ssobs(tfs, sym):
+	nc = np.array(sp.poly(sp.numer(tfs), sym).all_coeffs())
+	dc = np.array(sp.poly(sp.denom(tfs), sym).all_coeffs())
 	nc = [float(i) for i in nc]
 	dc = [float(i) for i in dc]
 	edc = ct.tf(*[nc, dc])
@@ -116,6 +116,7 @@ def readsacjson(keys):
 		d = json.load(f)
 	return [d[k] for k in keys]
 	
+
 
 
 
