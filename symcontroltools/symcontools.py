@@ -106,7 +106,7 @@ def sym_to_ssobs(tfs, sym):
 	dc = [float(i) for i in dc]
 	edc = ct.tf(*[nc, dc])
 	sssys  = ct.tf2ss(edc)
-	return sct.ss_to_ssobs(sssys)
+	return ss_to_ssobs(sssys)
 
 def readsacjson(keys):
 	script_path = Path(__file__).resolve()
@@ -116,6 +116,7 @@ def readsacjson(keys):
 		d = json.load(f)
 	return [d[k] for k in keys]
 	
+
 
 
 
