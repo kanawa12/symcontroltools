@@ -89,7 +89,7 @@ def get_tf(A, B, C, s):
 
 
 def ss_to_ssobs(sys):
-	n=sys.A.size()[0]
+	n=sys.A.shape()[0]
 	T = np.zeros([n,n])
 	for i in range(n):
 	    T[i, (n-1)-i] = 1
@@ -107,6 +107,7 @@ def readsacjson(keys):
 		d = json.load(f)
 	return [d[k] for k in keys]
 	
+
 
 
 
